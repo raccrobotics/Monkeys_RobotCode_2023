@@ -6,6 +6,7 @@
 DeviceDriverSet_Motor AppMotor;
 Application_xxx Application_SmartRobotCarxxx0;
 DeviceDriverSet_ITR20001 AppITR20001;
+int SPEED = 20;
 
 void setup() {
   // put your setup code here, to run once:
@@ -16,26 +17,26 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  go("F", 255);
+  go("F", SPEED);
 
   static unsigned long print_time = 0;
   if (millis() - print_time > 500){
     print_time = millis();
 
     if (getLeft() > 500){
-      go("L", 255);
+      go("L", SPEED);
       delay(500);
     }
     if(getLeft > 200){
-      go("LF", 255);
+      go("LF", SPEED);
       delay(250);
     }
     if(getRight() > 500){
-      go("R", 255);
+      go("R", SPEED);
       delay(500);
     }
     if(getRight() > 200){
-      go("RF", 255);
+      go("RF", SPEED);
       delay(250);
     }
   }
