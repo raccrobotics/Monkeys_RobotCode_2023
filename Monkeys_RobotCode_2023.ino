@@ -6,7 +6,7 @@
 DeviceDriverSet_Motor AppMotor;
 Application_xxx Application_SmartRobotCarxxx0;
 DeviceDriverSet_ITR20001 AppITR20001;
-int SPEED = 80, ON = 500;
+int SPEED = 90, ON = 500;
 bool isBoost = true;
 
 void setup() {
@@ -24,7 +24,7 @@ void loop() {
       delay(50);
       isBoost = false;
     }
-    go("F", SPEED + 70);
+    go("F", SPEED + 60);
   }
   else if (getRight() > ON){
     while (getRight() > ON){
