@@ -6,8 +6,8 @@
 DeviceDriverSet_Motor AppMotor;
 Application_xxx Application_SmartRobotCarxxx0;
 DeviceDriverSet_ITR20001 AppITR20001;
-int SPEED = 90, ON = 500;
-bool isBoost = true;
+int SPEED = 90, ON = 500; //constants for speed and value that determines whether or not the robot is on the line
+bool isBoost = true; //used for boost to prevent driving off of the line
 
 void setup() {
   // put your setup code here, to run once:
@@ -18,29 +18,30 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if (getMiddle() > ON){
-    if (isBoost && getLeft() < 100 && getRight < 100){
+  if (getMiddle() > ON){ //if the robot is on the line
+    if (isBoost && getLeft() < 100 && getRight < 100){ //goes max speed if the robot is traveling straight
       go("F", 255);
       delay(50);
       isBoost = false;
     }
-    go("F", SPEED + 60);
+    go("F", SPEED + 60); //resumes "normal" speed
   }
   else if (getRight() > ON){
-    while (getRight() > ON){
+    while (getRight() > ON){ //turns right until robot is back on the line
       go("R", SPEED);
     }
     isBoost = true;
   }
   else if (getLeft() > ON){
-    while(getLeft() > ON){
+    while(getLeft() > ON){ //turns left until robot is back on the line
       go("L", SPEED);
     }
     isBoost = true;
   }
 }
 
-void go(String direction, int speed){
+void go(String direction, int speed){ //turning these functions into english because it makes my life easier
+  //this extensive chain of if statements assigns the direction based on the string that is passed
   if (direction.equalsIgnoreCase("F")){
     Application_SmartRobotCarxxx0.Motion_Control = 0;
   }
@@ -68,9 +69,10 @@ void go(String direction, int speed){
   else{
     Application_SmartRobotCarxxx0.Motion_Control = 8;
   }
-  ApplicationFunctionSet_SmartRobotCarMotionControl(Application_SmartRobotCarxxx0.Motion_Control, speed);
+  ApplicationFunctionSet_SmartRobotCarMotionControl(Application_SmartRobotCarxxx0.Motion_Control, speed); //makes the robot go in the assigned direction at the assigned speed
 }
 
+//returns the values from the left, middle, and right functions, respectively
 int getLeft(){
   return AppITR20001.DeviceDriverSet_ITR20001_getAnaloguexxx_L();
 }
