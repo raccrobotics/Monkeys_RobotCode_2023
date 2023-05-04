@@ -6,7 +6,7 @@
 DeviceDriverSet_Motor AppMotor;
 Application_xxx Application_SmartRobotCarxxx0;
 DeviceDriverSet_ITR20001 AppITR20001;
-int SPEED = 60, ON = 500;
+int SPEED = 80, ON = 500;
 bool isBoost = true;
 
 void setup() {
@@ -19,12 +19,12 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   if (getMiddle() > ON){
-    if (isBoost && getLeft() < 50 && getRight < 50){
+    if (isBoost && getLeft() < 100 && getRight < 100){
       go("F", 255);
       delay(50);
       isBoost = false;
     }
-    go("F", SPEED + 90);
+    go("F", SPEED + 70);
   }
   else if (getRight() > ON){
     while (getRight() > ON){
